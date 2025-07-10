@@ -1,0 +1,7 @@
+{
+  "vendorName": "Stripe",
+  "language": "JavaScript",
+  "topics": ["payments", "authentication", "payment-intents"],
+  "lastUpdated": "2025-07-09",
+  "snippetPath": "vendors/stripe/snippet.md"
+}
