@@ -1,0 +1,8 @@
+{
+  "vendorName": "Twilio",
+  "language": "Python",
+  "topics": ["sms", "messaging", "authentication"],
+  "lastUpdated": "2025-07-09",
+  "snippetPath": "vendors/twilio/snippet.md"
+}
+

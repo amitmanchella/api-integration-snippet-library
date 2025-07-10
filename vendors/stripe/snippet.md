@@ -22,16 +22,11 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 ## Examples
 
-### Read: Retrieve a Customer && Minimal Error-Handling Pattern
+### Read: Retrieve a Customer
 
 ```javascript
-try {
-  const customer = await stripe.customers.retrieve('cus_12345');
-  console.log(customer);
-} catch (err) {
-  // err is a StripeError — inspect err.type, err.code, err.message
-  console.error('Stripe API error:', err);
-}
+const customer = await stripe.customers.retrieve('cus_12345');
+console.log(customer);
 ```
 
 ### Write: Create a Payment Intent
@@ -46,6 +41,17 @@ const paymentIntent = await stripe.paymentIntents.create({
 console.log(paymentIntent);
 ```
 
+### Minimal Error-Handling Pattern
+
+```javascript
+try {
+  const customer = await stripe.customers.retrieve('cus_12345');
+  console.log(customer);
+} catch (err) {
+  // err is a StripeError — inspect err.type, err.code, err.message
+  console.error('Stripe API error:', err);
+}
+```
 
 ## References
 
