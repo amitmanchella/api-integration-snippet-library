@@ -1,5 +1,3 @@
-# api-integration-snippet-library
-
 # API Integration Snippet Library
 
 This repository is a curated library of small, self-contained code snippets showing how to integrate with various APIs.
