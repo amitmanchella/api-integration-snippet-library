@@ -1,27 +1,40 @@
 {
   "vendors": [
-    {
-      "vendorName": "Stripe",
-      "language": "JavaScript",
-      "topics": ["payments", "authentication", "payment-intents"],
-      "lastUpdated": "2025-01-09",
-      "snippetPath": "vendors/stripe/snippet.md"
-    },
-    {
-      "vendorName": "Twilio",
-      "language": "Python",
-      "topics": ["sms", "messaging", "authentication"],
-      "lastUpdated": "2025-01-09",
-      "snippetPath": "vendors/twilio/snippet.md"
-    },
-    {
-      "vendorName": "GitHub",
-      "language": "JavaScript",
-      "topics": ["git", "repositories", "issues", "authentication"],
-      "lastUpdated": "2025-01-09",
-      "snippetPath": "vendors/github/snippet.md"
-    }
+      {
+          "vendorName": "Stripe",
+          "language": "JavaScript",
+          "topics": [
+              "payments",
+              "authentication",
+              "payment-intents"
+          ],
+          "lastUpdated": "2025-01-09",
+          "snippetPath": "vendors/stripe/snippet.md"
+      },
+      {
+          "vendorName": "Twilio",
+          "language": "Python",
+          "topics": [
+              "sms",
+              "messaging",
+              "authentication"
+          ],
+          "lastUpdated": "2025-01-09",
+          "snippetPath": "vendors/twilio/snippet.md"
+      },
+      {
+          "vendorName": "GitHub",
+          "language": "JavaScript",
+          "topics": [
+              "git",
+              "repositories",
+              "issues",
+              "authentication"
+          ],
+          "lastUpdated": "2025-01-09",
+          "snippetPath": "vendors/github/snippet.md"
+      }
   ],
   "lastUpdated": "2025-01-09",
   "totalVendors": 3
-} 
+}
