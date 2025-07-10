@@ -22,12 +22,16 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 ## Examples
 
-### Read: Retrieve a Customer
+### Read: Retrieve a Customer && Minimal Error-Handling Pattern
 
 ```javascript
-// All Stripe SDK calls return Promises – use await or .then()
-const customer = await stripe.customers.retrieve('cus_12345');
-console.log(customer);
+try {
+  const customer = await stripe.customers.retrieve('cus_12345');
+  console.log(customer);
+} catch (err) {
+  // err is a StripeError — inspect err.type, err.code, err.message
+  console.error('Stripe API error:', err);
+}
 ```
 
 ### Write: Create a Payment Intent
@@ -44,12 +48,10 @@ console.log(paymentIntent);
 
 
 ## References
-- Installation & SDK setup: [Stripe Node quick-start]
-(https://docs.stripe.com/get-started/development-environment?lang=node)
-- Retrieve customer (read): [Customers -> Retrieve]
-(https://docs.stripe.com/api/customers/retrieve)
-- Create payment (write): [PaymentIntents -> Create]
-(https://docs.stripe.com/api/payment_intents/create)
+
+- Installation & SDK setup: [Stripe Node quick-start](https://docs.stripe.com/get-started/development-environment?lang=node)
+- Retrieve customer (read): [Customers -> Retrieve](https://docs.stripe.com/api/customers/retrieve)
+- Create payment (write): [PaymentIntents -> Create](https://docs.stripe.com/api/payment_intents/create)
 
 
 
