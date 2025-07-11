@@ -61,7 +61,7 @@ api-integration-snippet-library/
 
 ---
 
-## 🆕 Adding a New API Snippet (Vendor)
+## Adding a New API Snippet (Vendor)
 
 1. **Add a new folder in `vendors/`**
    - Example: `vendors/myapi/`
@@ -82,7 +82,7 @@ api-integration-snippet-library/
 
 ---
 
-## 🛠️ Claude Desktop Config Example
+## Claude Desktop Config Example
 
 - Open your Claude Desktop config file (e.g., `~/Library/Application Support/Claude/claude_desktop_config.json` on Mac).
 - Add or update the server entry:
