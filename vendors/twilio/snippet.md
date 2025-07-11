@@ -12,14 +12,12 @@ Install the official Twilio Python SDK:
 pip install twilio
 ```
 
-## Setup & Authentication
+### Auth: Authentication Example
 
 ```python
 from twilio.rest import Client
 import os
-
 # Initialize the Twilio client with your credentials
-# (Set TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN in your environment, e.g. a .env file)
 account_sid = os.getenv("TWILIO_ACCOUNT_SID")
 auth_token = os.getenv("TWILIO_AUTH_TOKEN")
 client = Client(account_sid, auth_token)
@@ -48,7 +46,7 @@ message = client.messages.create(
 print(message.sid)
 ```
 
-### Minimal Error-Handling Pattern
+### Error-Handling Pattern
 
 ```python
 from twilio.base.exceptions import TwilioRestException

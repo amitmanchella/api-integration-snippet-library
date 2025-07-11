@@ -1,0 +1,27 @@
+{
+  "name": "api-snippet-library",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "api-snippet-library": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 755 build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": ["mcp", "api", "snippets", "stripe", "twilio", "github"],
+  "author": "",
+  "license": "ISC",
+  "description": "MCP server providing API integration snippets for Stripe, Twilio, and GitHub",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12",
+    "typescript": "^5.8.3"
+  }
+}

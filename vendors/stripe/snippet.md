@@ -12,7 +12,7 @@ Install the official Stripe Node SDK:
 npm install stripe --save
 ```
 
-## Setup & Authentication
+### Auth: Authentication Example
 
 ```javascript
 // Initialize the Stripe SDK with your secret key
@@ -41,7 +41,7 @@ const paymentIntent = await stripe.paymentIntents.create({
 console.log(paymentIntent);
 ```
 
-### Minimal Error-Handling Pattern
+### Error-Handling Pattern
 
 ```javascript
 try {

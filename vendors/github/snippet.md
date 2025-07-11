@@ -12,7 +12,7 @@ Install the official GitHub REST API client:
 npm install @octokit/rest
 ```
 
-## Setup & Authentication
+### Auth: Authentication Example
 
 ```javascript
 import { Octokit } from "octokit";
@@ -55,7 +55,7 @@ try {
 }
 ```
 
-### Minimal Error-Handling Pattern
+### Error-Handling Pattern
 
 ```javascript
 import { RequestError } from "@octokit/request-error";
