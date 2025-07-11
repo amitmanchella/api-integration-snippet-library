@@ -1,6 +1,14 @@
 # API Integration Snippet Library
 
-A curated, up-to-date library of API integration snippets (Stripe, Twilio, GitHub) with a modern searchable web app and MCP server for Claude Desktop integration.
+A curated, up-to-date library of API integration snippets (Stripe, Twilio, GitHub, and more) with a modern searchable web app and a dynamic MCP server for Claude Desktop integration.
+
+---
+
+## Demo
+
+See a video demo of the MCP server in Claude Desktop: [Loom Video](https://www.loom.com/share/b2429b1bc9714d9eaee72f61ca86e467?sid=7415c62b-3489-4910-adcf-e9306b508e20)
+
+---
 
 ## Directory Structure
 ```
@@ -15,91 +23,108 @@ api-integration-snippet-library/
 │   └── github/
 │       ├── snippet.md          # GitHub API integration examples
 │       └── metadata.json       # Vendor metadata
-├── metadata-index.json         # Combined metadata for web app
+├── metadata-index.json         # Combined metadata for web app (auto-generated)
+├── scripts/                    # Utility scripts (parse, build, etc.)
 ├── web-app/                    # Web app source code
 ├── api-snippet-library-mcp/    # MCP server for Claude Desktop
 └── README.md                   
 ```
 
-## Quick Start
+---
+
+## Running the App Locally
 
 ### Web App
-- Run locally: `cd web-app && python3 -m http.server 8000`
-- Open [http://localhost:8000/](http://localhost:8000/)
+1. Serve the web app directory:
+   ```bash
+   cd web-app
+   python3 -m http.server 8000
+   # or use any static server
+   ```
+2. Open [http://localhost:8000/](http://localhost:8000/) in your browser.
 
 ### MCP Server (Claude Desktop)
-
-**To use the API Snippet Library MCP server in Claude Desktop:**
-
-1. **Build the server:**
+1. **Install dependencies and build:**
    ```bash
    cd api-snippet-library-mcp
-   npm install  # Only needed the first time or after changing dependencies
-   npm run build
+   npm install
+   npx tsc
+   ```
+2. **Run the MCP server:**
+   ```bash
+   node build/index.js
+   # or use your preferred method to run the built server
+   ```
+3. **Configure Claude Desktop:**
+   - Point Claude Desktop to your MCP server (see below for config details).
+   - Restart Claude Desktop to pick up the new server/tools.
+
+---
+
+## 🆕 Adding a New API Snippet (Vendor)
+
+1. **Add a new folder in `vendors/`**
+   - Example: `vendors/myapi/`
+   - Add a `snippet.md` (required) and `metadata.json` (optional, for extra metadata).
+   - Use `### Action: Description` headings in your markdown for each tool (e.g., `### Auth:`, `### Read:`, `### Write:`).
+
+2. **Regenerate the metadata index:**
+   ```bash
+   node scripts/generateMetadataIndex.js
    ```
 
-2. **Configure Claude Desktop:**
-   - Open your Claude Desktop config file:
-     - On Mac: `~/Library/Application Support/Claude/claude_desktop_config.json`
+3. **Restart the MCP server:**
+   - The server will automatically expose new tools for each action in your markdown.
+   - No code changes are needed!
 
-   - **If your config uses the old format (`mcpServers`):**
-     ```json
-     {
-       "mcpServers": {
-         "api-snippet-library": {
-           "command": "node",
-           "args": [
-             "/path/to/your/project/api-snippet-library-mcp/build/index.js"
-           ]
-         }
-       }
-     }
-     ```
-   - **If your config uses the new format (`servers`):**
-     ```json
-     {
-       "servers": [
-         {
-           "name": "API Snippet Library",
-           "command": "node",
-           "args": ["build/index.js"],
-           "cwd": "/path/to/your/project/api-snippet-library-mcp",
-           "type": "node"
-         }
-       ]
-     }
-     ```
-   - Replace `/path/to/your/project` with the actual path to your project directory.
-   - Save the file.
+4. **(Optional) Push to GitHub**
+   - If you want the web app to show the new snippet, push your changes to GitHub.
 
-3. **Restart Claude Desktop:**
-   - Fully quit and reopen Claude Desktop to reload the config.
+---
 
-4. **Select the API Snippet Library server:**
-   - Go to the Developer tab in Claude Desktop settings.
-   - You should see "API Snippet Library" as an available server/tool.
+## 🛠️ Claude Desktop Config Example
 
-5. **Troubleshooting:**
-   - Make sure Node.js is installed and available system-wide (`node --version` should print v18 or v20).
-   - If you don't see the server, double-check the config file path, JSON syntax, and that you have built the server.
-   - If you see errors, try moving the project to a simpler path (e.g., `~/testmcp`) and update the config accordingly.
-   - For more help, see the project README or contact support.
+- Open your Claude Desktop config file (e.g., `~/Library/Application Support/Claude/claude_desktop_config.json` on Mac).
+- Add or update the server entry:
+  ```json
+  {
+    "servers": [
+      {
+        "name": "API Snippet Library",
+        "command": "node",
+        "args": ["dist/index.js"],
+        "cwd": "/path/to/your/project/api-snippet-library-mcp",
+        "type": "node"
+      }
+    ]
+  }
+  ```
+- Save and restart Claude Desktop.
 
-## Add a Vendor
-1. Add a folder in `vendors/` with `snippet.md` and `metadata.json`.
-2. Update `metadata-index.json`.
-3. Add corresponding tools to `api-snippet-library-mcp/src/index.ts`.
-4. Push to GitHub (public).
+---
 
 ## Features
-- **Web App**: Search/filter by vendor or topic, click a vendor to view rendered Markdown snippets
-- **MCP Server**: 12 tools for Stripe, Twilio, and GitHub (auth, read, write, error handling)
-- Easy to extend with new APIs
+- **Web App**: Search/filter by vendor or topic, click a vendor to view rendered Markdown snippets (fetched from GitHub main branch)
+- **Dynamic MCP Server**: Tools are auto-generated for every vendor/action in your markdown—no manual code changes needed
+- **Easy to extend**: Just drop in a new folder with a markdown file and restart the server
 
-## MCP Tools Available
-- **Stripe**: `stripe-auth`, `stripe-read`, `stripe-write`, `stripe-error`
-- **Twilio**: `twilio-auth`, `twilio-read`, `twilio-write`, `twilio-error`
-- **GitHub**: `github-auth`, `github-read`, `github-write`, `github-error`
+---
+
+## MCP Tools Available (Examples)
+- **Stripe**: `stripe-auth`, `stripe-read`, `stripe-write`, etc.
+- **Twilio**: `twilio-auth`, `twilio-read`, `twilio-write`, etc.
+- **GitHub**: `github-auth`, `github-read`, `github-write`, etc.
+- **Any new vendor/action you add will appear automatically!**
+
+---
+
+## Troubleshooting
+- If you don’t see new snippets/tools, make sure you:
+  - Regenerated `metadata-index.json`
+  - Restarted the MCP server
+  - Pushed changes to GitHub (for the web app)
+  - Restarted Claude Desktop
+- For local web app testing, ensure your static server is serving the latest files.
 
 ---
 
